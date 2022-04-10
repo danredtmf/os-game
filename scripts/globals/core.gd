@@ -8,3 +8,4 @@ const bg_black = Color(0, 0, 0, 1)
 const bg_on = Color(0.21, 0.55, 0.99, 1)
 
 enum INFO_STATE {ONE, TWO, THREE, FOUR}
+enum LOGON_STATE {OFF, START, RELOAD, LOGIN}

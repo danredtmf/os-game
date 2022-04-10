@@ -20,9 +20,7 @@ onready var tween = $c/Tween
 onready var tween2 = $c/Tween2
 onready var tween3 = $c/Tween3
 
-var on_start = true
-var on_restart = false
-var on_login = false
+var state = Core.LOGON_STATE.START
 
 func _ready():
 	config()
@@ -52,34 +50,38 @@ func start():
 func load_user_list():
 	var user_list = Data.get_user_list()
 	
-	# Дописать добавление списка пользователей
-	
 	for i in range(len(user_list)):
 		print_debug(user_list[i].to_string())
 		var user_panel = user_res.instance()
+		user_panel.get_node("margin/hb/select")\
+			.connect("pressed", self, "on_select_user")
 		user_panel.id = user_list[i].id
 		user_panel.user_name = user_list[i].user_name
 		win_user_select_list.add_child(user_panel)
 
+func on_select_user():
+	t_win_user_select(false)
+	t_win_logon()
+
 func info_state():
-	var state = Core.INFO_STATE.ONE
+	var info_state = Core.INFO_STATE.ONE
 	t_color(bg, Core.bg_black, Core.bg_on, 4)
 	
 	t3_modulate_a(info, 0, 1, 1)
 	for _i in range(8):
 		yield(get_tree().create_timer(0.5), "timeout")
 		
-		match state:
+		match info_state:
 			Core.INFO_STATE.ONE:
-				state = Core.INFO_STATE.TWO
+				info_state = Core.INFO_STATE.TWO
 			Core.INFO_STATE.TWO:
-				state = Core.INFO_STATE.THREE
+				info_state = Core.INFO_STATE.THREE
 			Core.INFO_STATE.THREE:
-				state = Core.INFO_STATE.FOUR
+				info_state = Core.INFO_STATE.FOUR
 			Core.INFO_STATE.FOUR:
-				state = Core.INFO_STATE.ONE
+				info_state = Core.INFO_STATE.ONE
 		
-		match state:
+		match info_state:
 			Core.INFO_STATE.ONE:
 				info.text = ""
 			Core.INFO_STATE.TWO:
@@ -90,21 +92,27 @@ func info_state():
 				info.text = "..."
 	t3_modulate_a(info, 1, 0, 1)
 
-func t_info(b = true):
+func t_win_user_select(b = true):
 	if b:
-		info.visible = true
-		tween3.interpolate_property(info, 'modulate:a', 0.0, 1.0, 1.0, 
-		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween3.start()
+		win_user_select.visible = true
+		
+		tween.interpolate_property(win_user_select, 'modulate:a', 0.0, 
+		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(win_user_select, 'rect_position:y', 
+		win_user_select_rect_y + 20, win_user_select_rect_y, 
+		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.start()
 	else:
-		tween3.interpolate_property(info, 'modulate:a', 1.0, 0.0, 1.0, 
-		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween3.start()
+		tween.interpolate_property(win_user_select, 'modulate:a', 1.0, 
+		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(win_user_select, 'rect_position:y', 
+		win_user_select_rect_y, win_user_select_rect_y + 20, 
+		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.start()
 
 func t_win_logon(b = true):
 	if b:
 		win_logon.visible = true
-		win_power.visible = true
 		
 		tween.interpolate_property(win_logon, 'modulate:a', 0.0, 
 		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -112,10 +120,6 @@ func t_win_logon(b = true):
 		win_logon_rect_y + 20, win_logon_rect_y, 
 		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		tween.start()
-		
-		tween2.interpolate_property(win_power, 'modulate:a', 0.0, 
-		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween2.start()
 	else:
 		tween.interpolate_property(win_logon, 'modulate:a', 1.0, 
 		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -123,7 +127,15 @@ func t_win_logon(b = true):
 		win_logon_rect_y, win_logon_rect_y + 20, 
 		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		tween.start()
+
+func t_win_power(b = true):
+	if b:
+		win_power.visible = true
 		
+		tween2.interpolate_property(win_power, 'modulate:a', 0.0, 
+		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween2.start()
+	else:
 		tween2.interpolate_property(win_power, 'modulate:a', 1.0, 
 		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		tween2.start()
@@ -143,17 +155,7 @@ func info_login():
 	t3_modulate_a(info, 0, 1, 1)
 	info.text = 'Добро пожаловать, ' + Data.active_user.user_name + '!'
 	yield(get_tree().create_timer(2), "timeout")
-	on_login = true
-
-func t_bg(b = true):
-	if b:
-		tween.interpolate_property(bg, 'color', Core.bg_black, 
-		Core.bg_on, 4.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-	else:
-		tween.interpolate_property(bg, 'color', Core.bg_on, 
-		Core.bg_black, 4.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
+	state = Core.LOGON_STATE.LOGIN
 
 func _on_Tween_tween_completed(object, _key):
 	# Когда синий экран
@@ -162,7 +164,8 @@ func _on_Tween_tween_completed(object, _key):
 		if Data.active_user == null && len(Data.users) > 2:
 			# Показать экран выбора пользователя
 			yield(get_tree().create_timer(1), "timeout")
-			t_win_logon() # Заменить на экран выбора пользователя
+			t_win_user_select()
+			t_win_power()
 		# Когда Нет активного пользователя И пользователей 2
 		elif Data.active_user == null && len(Data.users) == 2:
 			# Выбор не скрытого пользователя
@@ -176,6 +179,7 @@ func _on_Tween_tween_completed(object, _key):
 			else:
 				# Проверка защиты
 				t_win_logon()
+				t_win_power()
 	# Когда чёрный экран
 	elif object == bg && bg.color == Core.bg_black:
 		# Затухание info текста
@@ -187,9 +191,10 @@ func _on_Tween_tween_completed(object, _key):
 		win_logon.visible = false
 
 func _on_off_pressed():
-	on_start = !on_start
+	state = Core.LOGON_STATE.OFF
 	t_color(bg, Core.bg_on, Core.bg_black, 4)
 	t_win_logon(false)
+	t_win_power(false)
 
 func _on_Tween2_tween_completed(object, _key):
 	if object == win_power && win_power.modulate.a == 0 \
@@ -197,18 +202,17 @@ func _on_Tween2_tween_completed(object, _key):
 		win_power.visible = false
 
 func _on_reload_pressed():
-	on_start = !on_start
-	on_restart = !on_restart
+	state = Core.LOGON_STATE.RELOAD
 	t_color(bg, Core.bg_on, Core.bg_black, 4)
 	t_win_logon(false)
+	t_win_power(false)
 
 func _on_Tween3_tween_completed(_object, _key):
-	if !on_start && !on_restart && !on_login:
+	if state == Core.LOGON_STATE.OFF:
 		get_tree().quit()
-	if !on_start && on_restart && !on_login:
+	if state == Core.LOGON_STATE.RELOAD:
 		var restart = get_tree().change_scene("res://scenes/main.tscn")
 		if restart == OK:
 			print('////REBOOT-OS////')
-	if on_start && !on_restart && on_login:
+	if state == Core.LOGON_STATE.LOGIN:
 		get_tree().quit()
-
