@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sources/themes/button/normal.tres" type="StyleBox" id=1]
+[ext_resource path="res://sources/themes/font-sizes/rbk-r-18.tres" type="DynamicFont" id=2]
+[ext_resource path="res://objects/user-panel-select.gd" type="Script" id=3]
+
+[node name="user-panel-select" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( -136, -50 )
+script = ExtResource( 3 )
+
+[node name="margin" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 116.0
+margin_bottom = 59.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="hb" type="HBoxContainer" parent="margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 99.0
+margin_bottom = 42.0
+
+[node name="name" type="Label" parent="margin/hb"]
+margin_right = 1.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 2 )
+text = "Даниил"
+valign = 1
+clip_text = true
+
+[node name="select" type="Button" parent="margin/hb"]
+margin_left = 5.0
+margin_right = 89.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 1 )
+text = "Выбрать"
+
+[connection signal="pressed" from="margin/hb/select" to="." method="_on_select_pressed"]

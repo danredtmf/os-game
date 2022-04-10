@@ -6,6 +6,7 @@ onready var info = $e/loading/info
 onready var tween = $c/Tween
 
 func _ready():
+	Data.active_user = null
 	Data.load_user()
 	yield(get_tree().create_timer(1), "timeout")
 	start()

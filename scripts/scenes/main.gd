@@ -1,6 +1,6 @@
 extends Control
 
-onready var on_info = $e/on_info
+onready var info = $e/info
 
 var on_start = false
 
@@ -12,10 +12,10 @@ func _input(event):
 func start():
 	if !on_start:
 		on_start = !on_start
-		on_info.visible = false
+		info.visible = false
 		init()
 
 func init():
-	var loading = get_tree().change_scene_to(Core.loading_res) #Core.loading_res
+	var loading = get_tree().change_scene_to(Core.loading_res)
 	if loading == OK:
 		print('////LOADING-OS////')

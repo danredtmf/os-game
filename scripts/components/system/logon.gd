@@ -1,10 +1,14 @@
 extends Control
 
+const user_res = preload("res://objects/user-panel-select.tscn")
+
 onready var bg = $e/bg
 onready var info = $e/info
 onready var on = $e
 
 onready var win_user_select = $e/win_user_select
+onready var win_user_select_list = \
+			$e/win_user_select/margin/vb/scroll/margin/vb
 var win_user_select_rect_y
 
 onready var win_logon = $e/win_logon
@@ -22,6 +26,7 @@ var on_login = false
 
 func _ready():
 	config()
+	load_user_list()
 	yield(get_tree().create_timer(1), "timeout")
 	start()
 
@@ -43,6 +48,18 @@ func config():
 
 func start():
 	info_state()
+
+func load_user_list():
+	var user_list = Data.get_user_list()
+	
+	# Дописать добавление списка пользователей
+	
+	for i in range(len(user_list)):
+		print_debug(user_list[i].to_string())
+		var user_panel = user_res.instance()
+		user_panel.id = user_list[i].id
+		user_panel.user_name = user_list[i].user_name
+		win_user_select_list.add_child(user_panel)
 
 func info_state():
 	var state = Core.INFO_STATE.ONE
@@ -75,6 +92,7 @@ func info_state():
 
 func t_info(b = true):
 	if b:
+		info.visible = true
 		tween3.interpolate_property(info, 'modulate:a', 0.0, 1.0, 1.0, 
 		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		tween3.start()
@@ -123,7 +141,8 @@ func t_color(object: Object, init_color: Color, end_color: Color, time: float):
 func info_login():
 	t_color(bg, Core.bg_on, Core.bg_black, 4)
 	t3_modulate_a(info, 0, 1, 1)
-	info.text = 'Добро пожаловать, ' + Data.active_user['name'] + '!'
+	info.text = 'Добро пожаловать, ' + Data.active_user.user_name + '!'
+	yield(get_tree().create_timer(2), "timeout")
 	on_login = true
 
 func t_bg(b = true):
@@ -137,19 +156,34 @@ func t_bg(b = true):
 		tween.start()
 
 func _on_Tween_tween_completed(object, _key):
+	# Когда синий экран
 	if object == bg && bg.color == Core.bg_on:
-		if Data.active_user['id'] == null && len(Data.users) > 2: #if Data.user['settings']['is_unsafe'] == false:
+		# Если Нет активного пользователя И пользователей > 2
+		if Data.active_user == null && len(Data.users) > 2:
+			# Показать экран выбора пользователя
 			yield(get_tree().create_timer(1), "timeout")
-			t_win_logon()
-		elif Data.active_user['id'] == null && len(Data.users) > 1: #elif Data.user['settings']['is_unsafe'] == true:
+			t_win_logon() # Заменить на экран выбора пользователя
+		# Когда Нет активного пользователя И пользователей 2
+		elif Data.active_user == null && len(Data.users) == 2:
+			# Выбор не скрытого пользователя
+			# (Он всегда второй, Админ всегда первый)
 			Data.active_user = Data.users[len(Data.users) - 1]
-			print(Data.active_user['id'])
 			yield(get_tree().create_timer(1), "timeout")
-			info_login()
+			# Если пользователь без защиты
+			if Data.active_user.settings.is_unsafe:
+				# Вход в систему
+				info_login()
+			else:
+				# Проверка защиты
+				t_win_logon()
+	# Когда чёрный экран
 	elif object == bg && bg.color == Core.bg_black:
+		# Затухание info текста
 		t3_modulate_a(info, 1, 0, 1)
+	# Когда потух Проверка защиты но ещё виден в дереве
 	elif object == win_logon && win_logon.modulate.a == 0 \
 	&& win_logon.visible == true:
+		# Скрыть, чтобы случайно не тронуть невидимку
 		win_logon.visible = false
 
 func _on_off_pressed():
@@ -169,11 +203,12 @@ func _on_reload_pressed():
 	t_win_logon(false)
 
 func _on_Tween3_tween_completed(_object, _key):
-	if !on_start && !on_restart && !on_login && info.modulate.a == 0:
+	if !on_start && !on_restart && !on_login:
 		get_tree().quit()
-	elif !on_start && on_restart && !on_login && info.modulate.a == 0:
+	if !on_start && on_restart && !on_login:
 		var restart = get_tree().change_scene("res://scenes/main.tscn")
 		if restart == OK:
 			print('////REBOOT-OS////')
-	elif on_start && !on_restart && on_login && info.modulate.a == 0:
+	if on_start && !on_restart && on_login:
 		get_tree().quit()
+
