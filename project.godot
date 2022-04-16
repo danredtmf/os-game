@@ -10,17 +10,41 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Chat",
+"language": "GDScript",
+"path": "res://objects/chat.gd"
+}, {
+"base": "Node",
+"class": "ChatDialog",
+"language": "GDScript",
+"path": "res://objects/chat-dialog.gd"
+}, {
+"base": "Node",
+"class": "ChatDialogMessage",
+"language": "GDScript",
+"path": "res://objects/chat-dialog-message.gd"
+}, {
+"base": "Node",
 "class": "User",
 "language": "GDScript",
-"path": "res://objects/user-res.gd"
+"path": "res://objects/user.gd"
+}, {
+"base": "Node",
+"class": "UserApps",
+"language": "GDScript",
+"path": "res://objects/user-apps.gd"
 }, {
 "base": "Node",
 "class": "UserSettings",
 "language": "GDScript",
-"path": "res://objects/user-settings-res.gd"
+"path": "res://objects/user-settings.gd"
 } ]
 _global_script_class_icons={
+"Chat": "",
+"ChatDialog": "",
+"ChatDialogMessage": "",
 "User": "",
+"UserApps": "",
 "UserSettings": ""
 }
 
@@ -37,11 +61,12 @@ Data="*res://scripts/globals/data.gd"
 
 [display]
 
-window/size/always_on_top=true
-window/size/test_width=512
-window/size/test_height=300
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[global]
+
+Version=""
 
 [physics]
 

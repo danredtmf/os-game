@@ -1,27 +1,480 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/components/system/logon.gd" type="Script" id=1]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-32.tres" type="DynamicFont" id=2]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-24.tres" type="DynamicFont" id=3]
-[ext_resource path="res://sources/themes/edit-text/normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://sources/themes/button/normal.tres" type="StyleBox" id=5]
+[ext_resource path="res://sources/themes/light_theme.tres" type="Theme" id=5]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-18.tres" type="DynamicFont" id=6]
-[ext_resource path="res://sources/themes/panel/login_win.tres" type="StyleBox" id=7]
-[ext_resource path="res://sources/themes/panel/scroll_win.tres" type="StyleBox" id=8]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_user_select:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 358, 160.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_user_select:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_user_select:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_user_select:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_user_select:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_user_select:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_user_select:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_user_select:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_user_select:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_logon:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_logon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_logon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_logon:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_logon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_logon:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_logon:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_logon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("win_logon:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_power:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_power:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_power:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_power:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("win_power:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("win_power:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "hide"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.21, 0.55, 0.99, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("bg:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.21, 0.55, 0.99, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("info:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("info:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/path = NodePath("info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("info:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="logon" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 5 )
 script = ExtResource( 1 )
 
-[node name="e" type="Node" parent="."]
-
-[node name="bg" type="ColorRect" parent="e"]
+[node name="bg" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="info" type="Label" parent="e"]
+[node name="info" type="Label" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -32,82 +485,83 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="win_user_select" type="PanelContainer" parent="e"]
+[node name="win_user_select" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -125.0
-margin_right = 150.0
-margin_bottom = 125.0
-custom_styles/panel = ExtResource( 7 )
+margin_left = -154.0
+margin_top = -139.5
+margin_right = 154.0
+margin_bottom = 139.5
 
-[node name="margin" type="MarginContainer" parent="e/win_user_select"]
-margin_right = 300.0
-margin_bottom = 250.0
+[node name="margin" type="MarginContainer" parent="win_user_select"]
+margin_right = 308.0
+margin_bottom = 279.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="vb" type="VBoxContainer" parent="e/win_user_select/margin"]
+[node name="vb" type="VBoxContainer" parent="win_user_select/margin"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 290.0
-margin_bottom = 240.0
+margin_right = 298.0
+margin_bottom = 269.0
 alignment = 1
 
-[node name="vb_w" type="VBoxContainer" parent="e/win_user_select/margin/vb"]
-margin_right = 280.0
-margin_bottom = 37.0
+[node name="vb_w" type="VBoxContainer" parent="win_user_select/margin/vb"]
+margin_right = 288.0
+margin_bottom = 51.0
 size_flags_vertical = 3
 alignment = 1
 
-[node name="info" type="Label" parent="e/win_user_select/margin/vb/vb_w"]
-margin_top = 4.0
-margin_right = 280.0
-margin_bottom = 33.0
+[node name="info" type="Label" parent="win_user_select/margin/vb/vb_w"]
+margin_top = 11.0
+margin_right = 288.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 3 )
 text = "Выберите пользователя"
 align = 1
 valign = 1
-autowrap = true
 
-[node name="scroll" type="ScrollContainer" parent="e/win_user_select/margin/vb"]
-margin_top = 41.0
-margin_right = 280.0
-margin_bottom = 189.0
+[node name="scroll" type="ScrollContainer" parent="win_user_select/margin/vb"]
+margin_top = 55.0
+margin_right = 288.0
+margin_bottom = 203.0
 rect_min_size = Vector2( 0, 148 )
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 8 )
 follow_focus = true
 
-[node name="margin" type="MarginContainer" parent="e/win_user_select/margin/vb/scroll"]
-margin_right = 280.0
-margin_bottom = 20.0
+[node name="margin" type="MarginContainer" parent="win_user_select/margin/vb/scroll"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 283.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
 
-[node name="vb" type="VBoxContainer" parent="e/win_user_select/margin/vb/scroll/margin"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 270.0
-margin_bottom = 10.0
+[node name="vb" type="VBoxContainer" parent="win_user_select/margin/vb/scroll/margin"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 273.0
+margin_bottom = 5.0
 size_flags_horizontal = 3
-custom_constants/separation = 20
+custom_constants/separation = 5
 
-[node name="hb_i" type="HBoxContainer" parent="e/win_user_select/margin/vb"]
-margin_top = 195.0
-margin_right = 280.0
-margin_bottom = 227.0
+[node name="hb_i" type="HBoxContainer" parent="win_user_select/margin/vb"]
+margin_top = 217.0
+margin_right = 288.0
+margin_bottom = 249.0
 size_flags_vertical = 6
 alignment = 1
 
-[node name="info_acc" type="Label" parent="e/win_user_select/margin/vb/hb_i"]
+[node name="info_acc" type="Label" parent="win_user_select/margin/vb/hb_i"]
 margin_top = 5.0
 margin_right = 87.0
 margin_bottom = 27.0
@@ -117,15 +571,16 @@ text = "Впервые?"
 align = 1
 valign = 1
 
-[node name="register" type="Button" parent="e/win_user_select/margin/vb/hb_i"]
-margin_left = 139.0
-margin_right = 280.0
+[node name="register" type="Button" parent="win_user_select/margin/vb/hb_i"]
+margin_left = 147.0
+margin_right = 288.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
 text = "Новый аккаунт"
 
-[node name="win_logon" type="PanelContainer" parent="e"]
+[node name="win_logon" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -134,9 +589,8 @@ margin_left = -150.0
 margin_top = -125.0
 margin_right = 150.0
 margin_bottom = 125.0
-custom_styles/panel = ExtResource( 7 )
 
-[node name="margin" type="MarginContainer" parent="e/win_logon"]
+[node name="margin" type="MarginContainer" parent="win_logon"]
 margin_right = 300.0
 margin_bottom = 250.0
 custom_constants/margin_right = 10
@@ -144,118 +598,106 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="vb" type="VBoxContainer" parent="e/win_logon/margin"]
+[node name="vb" type="VBoxContainer" parent="win_logon/margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 290.0
 margin_bottom = 240.0
+custom_constants/separation = 15
 alignment = 1
 
-[node name="vb_w" type="VBoxContainer" parent="e/win_logon/margin/vb"]
+[node name="vb_w" type="VBoxContainer" parent="win_logon/margin/vb"]
 margin_right = 280.0
-margin_bottom = 46.0
+margin_bottom = 34.0
 size_flags_vertical = 3
-alignment = 1
 
-[node name="welcome" type="Label" parent="e/win_logon/margin/vb/vb_w"]
-margin_top = 8.0
+[node name="welcome" type="Label" parent="win_logon/margin/vb/vb_w"]
 margin_right = 280.0
-margin_bottom = 37.0
+margin_bottom = 29.0
 custom_fonts/font = ExtResource( 3 )
 text = "Добро пожаловать!"
 align = 1
 valign = 1
 autowrap = true
 
-[node name="vb" type="VBoxContainer" parent="e/win_logon/margin/vb"]
-margin_top = 50.0
+[node name="vb" type="VBoxContainer" parent="win_logon/margin/vb"]
+margin_top = 49.0
 margin_right = 280.0
-margin_bottom = 180.0
+margin_bottom = 183.0
 size_flags_vertical = 3
 custom_constants/separation = 15
 alignment = 1
 
-[node name="name" type="HBoxContainer" parent="e/win_logon/margin/vb/vb"]
+[node name="login" type="HBoxContainer" parent="win_logon/margin/vb/vb"]
 margin_right = 280.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 0, 30 )
 alignment = 1
 
-[node name="name" type="Label" parent="e/win_logon/margin/vb/vb/name"]
+[node name="login" type="Label" parent="win_logon/margin/vb/vb/login"]
+margin_top = 1.0
 margin_right = 138.0
-margin_bottom = 29.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Логин:"
 valign = 1
 
-[node name="edit" type="LineEdit" parent="e/win_logon/margin/vb/vb/name"]
+[node name="edit" type="LineEdit" parent="win_logon/margin/vb/vb/login"]
 margin_left = 142.0
 margin_right = 280.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 4 )
 
-[node name="pass" type="HBoxContainer" parent="e/win_logon/margin/vb/vb"]
-margin_top = 45.0
+[node name="pass" type="HBoxContainer" parent="win_logon/margin/vb/vb"]
+margin_top = 47.0
 margin_right = 280.0
-margin_bottom = 75.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 0, 30 )
 
-[node name="pass" type="Label" parent="e/win_logon/margin/vb/vb/pass"]
+[node name="pass" type="Label" parent="win_logon/margin/vb/vb/pass"]
+margin_top = 1.0
 margin_right = 138.0
-margin_bottom = 29.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Пароль:"
 valign = 1
 
-[node name="edit" type="LineEdit" parent="e/win_logon/margin/vb/vb/pass"]
+[node name="edit" type="LineEdit" parent="win_logon/margin/vb/vb/pass"]
 margin_left = 142.0
 margin_right = 280.0
-margin_bottom = 30.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 4 )
 secret = true
 
-[node name="login" type="Button" parent="e/win_logon/margin/vb/vb"]
-margin_top = 90.0
+[node name="login_btn" type="Button" parent="win_logon/margin/vb/vb"]
+margin_top = 94.0
 margin_right = 280.0
-margin_bottom = 130.0
+margin_bottom = 134.0
 rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = ExtResource( 3 )
-custom_styles/normal = ExtResource( 5 )
 text = "Войти"
 
-[node name="hb_i" type="HBoxContainer" parent="e/win_logon/margin/vb"]
-margin_top = 191.0
+[node name="hb_i" type="HBoxContainer" parent="win_logon/margin/vb"]
+margin_top = 198.0
 margin_right = 280.0
-margin_bottom = 223.0
-size_flags_vertical = 6
+margin_bottom = 230.0
 alignment = 1
 
-[node name="info_acc" type="Label" parent="e/win_logon/margin/vb/hb_i"]
-margin_top = 5.0
-margin_right = 140.0
-margin_bottom = 27.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 6 )
-text = "Забыли пароль?"
-valign = 1
-
-[node name="remember" type="Button" parent="e/win_logon/margin/vb/hb_i"]
-margin_left = 144.0
+[node name="back" type="Button" parent="win_logon/margin/vb/hb_i"]
 margin_right = 280.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
-text = "Вспомнить"
+text = "Назад"
 
-[node name="win_power" type="PanelContainer" parent="e"]
+[node name="win_power" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -264,9 +706,8 @@ margin_left = -294.0
 margin_top = -68.0
 margin_right = -16.0
 margin_bottom = -16.0
-custom_styles/panel = ExtResource( 7 )
 
-[node name="margin" type="MarginContainer" parent="e/win_power"]
+[node name="margin" type="MarginContainer" parent="win_power"]
 margin_right = 278.0
 margin_bottom = 52.0
 custom_constants/margin_right = 10
@@ -274,7 +715,7 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="hb" type="HBoxContainer" parent="e/win_power/margin"]
+[node name="hb" type="HBoxContainer" parent="win_power/margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 268.0
@@ -282,31 +723,49 @@ margin_bottom = 42.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="reload" type="Button" parent="e/win_power/margin/hb"]
+[node name="reload" type="Button" parent="win_power/margin/hb"]
 margin_right = 140.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
 text = "Перезагрузить"
 
-[node name="off" type="Button" parent="e/win_power/margin/hb"]
+[node name="off" type="Button" parent="win_power/margin/hb"]
 margin_left = 150.0
 margin_right = 258.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 5 )
 text = "Выключить"
 
-[node name="c" type="Node" parent="."]
+[node name="anim_wus" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/hide = SubResource( 3 )
+anims/show = SubResource( 1 )
 
-[node name="Tween" type="Tween" parent="c"]
+[node name="anim_logon" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/hide = SubResource( 6 )
+anims/show = SubResource( 5 )
 
-[node name="Tween2" type="Tween" parent="c"]
+[node name="anim_power" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/hide = SubResource( 8 )
+anims/show = SubResource( 9 )
 
-[node name="Tween3" type="Tween" parent="c"]
+[node name="anim_bg" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 10 )
+anims/hide = SubResource( 12 )
+anims/show = SubResource( 11 )
 
-[connection signal="pressed" from="e/win_power/margin/hb/reload" to="." method="_on_reload_pressed"]
-[connection signal="pressed" from="e/win_power/margin/hb/off" to="." method="_on_off_pressed"]
-[connection signal="tween_completed" from="c/Tween" to="." method="_on_Tween_tween_completed"]
-[connection signal="tween_completed" from="c/Tween2" to="." method="_on_Tween2_tween_completed"]
-[connection signal="tween_completed" from="c/Tween3" to="." method="_on_Tween3_tween_completed"]
+[node name="anim_info" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/hide = SubResource( 14 )
+anims/show = SubResource( 15 )
+
+[connection signal="pressed" from="win_logon/margin/vb/vb/login_btn" to="." method="_on_login_btn_pressed"]
+[connection signal="pressed" from="win_logon/margin/vb/hb_i/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="win_power/margin/hb/reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="win_power/margin/hb/off" to="." method="_on_off_pressed"]
+[connection signal="animation_finished" from="anim_wus" to="." method="_on_anim_wus_animation_finished"]
+[connection signal="animation_finished" from="anim_logon" to="." method="_on_anim_logon_animation_finished"]
+[connection signal="animation_finished" from="anim_bg" to="." method="_on_anim_bg_animation_finished"]
+[connection signal="animation_finished" from="anim_info" to="." method="_on_anim_info_animation_finished"]

@@ -2,12 +2,11 @@ extends Node
 
 const USERS_PATH = 'user://users.data'
 
-var users = []
+var users: Array = []
 var active_user: User
 
 func select_user(id):
-	var index = users.find(id)
-	active_user = users[index]
+	active_user = users[id]
 
 func get_user_list():
 	var user_list = []

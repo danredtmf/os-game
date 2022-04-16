@@ -8,6 +8,7 @@ var login: String = ""
 var password: String = ""
 
 var settings: UserSettings = UserSettings.new()
+var apps: UserApps = UserApps.new()
 
 func _to_string():
 	var result = ("User_" + str(id) 

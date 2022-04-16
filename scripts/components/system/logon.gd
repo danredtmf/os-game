@@ -2,47 +2,54 @@ extends Control
 
 const user_res = preload("res://objects/user-panel-select.tscn")
 
-onready var bg = $e/bg
-onready var info = $e/info
-onready var on = $e
+enum WIN_STATE {SELECT, LOGON}
 
-onready var win_user_select = $e/win_user_select
-onready var win_user_select_list = \
-			$e/win_user_select/margin/vb/scroll/margin/vb
-var win_user_select_rect_y
+onready var bg = $bg
+onready var info = $info
 
-onready var win_logon = $e/win_logon
-var win_logon_rect_y
+onready var win_user_select = $win_user_select
+onready var win_user_select_list = $win_user_select/margin/vb/scroll/margin/vb
 
-onready var win_power = $e/win_power
+onready var win_logon = $win_logon
+onready var win_logon_back = $win_logon/margin/vb/hb_i/back
+onready var win_logon_login = $win_logon/margin/vb/vb/login/edit
+onready var win_logon_password = $win_logon/margin/vb/vb/pass/edit
 
-onready var tween = $c/Tween
-onready var tween2 = $c/Tween2
-onready var tween3 = $c/Tween3
+onready var win_power = $win_power
+
+onready var anim_wus = $anim_wus
+onready var anim_logon = $anim_logon
+onready var anim_power = $anim_power
+onready var anim_bg = $anim_bg
+onready var anim_info = $anim_info
 
 var state = Core.LOGON_STATE.START
+var win_state
 
 func _ready():
+	Data.active_user = null
+# warning-ignore:return_value_discarded
+	get_tree().connect("screen_resized", self, "config")
 	config()
 	load_user_list()
-	yield(get_tree().create_timer(1), "timeout")
 	start()
 
 func config():
-	win_user_select.visible = false
-	win_user_select.modulate.a = 0
-	win_user_select.set_anchors_preset(Control.PRESET_CENTER)
-	win_user_select_rect_y = win_user_select.rect_position.y
+	win_user_select.set_anchors_preset(Control.PRESET_CENTER, true)
 	
-	win_logon.visible = false
-	win_logon.modulate.a = 0
-	win_logon.set_anchors_preset(Control.PRESET_CENTER)
-	win_logon_rect_y = win_logon.rect_position.y
+	anim_wus.get_animation('show').track_set_key_value(0, 0, Vector2(win_user_select.rect_position.x, win_user_select.rect_position.y + 20))
+	anim_wus.get_animation('show').track_set_key_value(0, 1, Vector2(win_user_select.rect_position.x, win_user_select.rect_position.y))
 	
-	win_power.visible = false
-	win_power.modulate.a = 0
+	anim_wus.get_animation('hide').track_set_key_value(0, 0, Vector2(win_user_select.rect_position.x, win_user_select.rect_position.y))
+	anim_wus.get_animation('hide').track_set_key_value(0, 1, Vector2(win_user_select.rect_position.x, win_user_select.rect_position.y + 20))
 	
-	info.modulate.a = 0
+	win_logon.set_anchors_preset(Control.PRESET_CENTER, true)
+	
+	anim_logon.get_animation('show').track_set_key_value(0, 0, Vector2(win_logon.rect_position.x, win_logon.rect_position.y + 20))
+	anim_logon.get_animation('show').track_set_key_value(0, 1, Vector2(win_logon.rect_position.x, win_logon.rect_position.y))
+	
+	anim_logon.get_animation('hide').track_set_key_value(0, 0, Vector2(win_logon.rect_position.x, win_logon.rect_position.y))
+	anim_logon.get_animation('hide').track_set_key_value(0, 1, Vector2(win_logon.rect_position.x, win_logon.rect_position.y + 20))
 
 func start():
 	info_state()
@@ -51,7 +58,6 @@ func load_user_list():
 	var user_list = Data.get_user_list()
 	
 	for i in range(len(user_list)):
-		print_debug(user_list[i].to_string())
 		var user_panel = user_res.instance()
 		user_panel.get_node("margin/hb/select")\
 			.connect("pressed", self, "on_select_user")
@@ -60,14 +66,19 @@ func load_user_list():
 		win_user_select_list.add_child(user_panel)
 
 func on_select_user():
-	t_win_user_select(false)
-	t_win_logon()
+	win_logon_back.visible = true
+	
+	if !anim_wus.is_playing():
+		anim_wus.play("hide")
+	win_state = WIN_STATE.LOGON
 
 func info_state():
 	var info_state = Core.INFO_STATE.ONE
-	t_color(bg, Core.bg_black, Core.bg_on, 4)
+	if !anim_bg.is_playing():
+		anim_bg.play("show")
 	
-	t3_modulate_a(info, 0, 1, 1)
+	if !anim_info.is_playing():
+		anim_info.play("show")
 	for _i in range(8):
 		yield(get_tree().create_timer(0.5), "timeout")
 		
@@ -85,134 +96,118 @@ func info_state():
 			Core.INFO_STATE.ONE:
 				info.text = ""
 			Core.INFO_STATE.TWO:
-				info.text = "."
+				info.text = ""
 			Core.INFO_STATE.THREE:
-				info.text = ".."
+				info.text = ""
 			Core.INFO_STATE.FOUR:
-				info.text = "..."
-	t3_modulate_a(info, 1, 0, 1)
-
-func t_win_user_select(b = true):
-	if b:
-		win_user_select.visible = true
-		
-		tween.interpolate_property(win_user_select, 'modulate:a', 0.0, 
-		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.interpolate_property(win_user_select, 'rect_position:y', 
-		win_user_select_rect_y + 20, win_user_select_rect_y, 
-		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-	else:
-		tween.interpolate_property(win_user_select, 'modulate:a', 1.0, 
-		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.interpolate_property(win_user_select, 'rect_position:y', 
-		win_user_select_rect_y, win_user_select_rect_y + 20, 
-		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-
-func t_win_logon(b = true):
-	if b:
-		win_logon.visible = true
-		
-		tween.interpolate_property(win_logon, 'modulate:a', 0.0, 
-		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.interpolate_property(win_logon, 'rect_position:y', 
-		win_logon_rect_y + 20, win_logon_rect_y, 
-		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-	else:
-		tween.interpolate_property(win_logon, 'modulate:a', 1.0, 
-		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.interpolate_property(win_logon, 'rect_position:y', 
-		win_logon_rect_y, win_logon_rect_y + 20, 
-		0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-
-func t_win_power(b = true):
-	if b:
-		win_power.visible = true
-		
-		tween2.interpolate_property(win_power, 'modulate:a', 0.0, 
-		1.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween2.start()
-	else:
-		tween2.interpolate_property(win_power, 'modulate:a', 1.0, 
-		0.0, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween2.start()
-
-func t3_modulate_a(object: Object, init: float, end: float, time: float):
-	tween3.interpolate_property(object, 'modulate:a', init, end, time, 
-	Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	tween3.start()
-
-func t_color(object: Object, init_color: Color, end_color: Color, time: float):
-	tween.interpolate_property(object, 'color', init_color, 
-	end_color, time, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	tween.start()
+				info.text = ""
+	
+	if !anim_info.is_playing():
+		anim_info.play("hide")
 
 func info_login():
-	t_color(bg, Core.bg_on, Core.bg_black, 4)
-	t3_modulate_a(info, 0, 1, 1)
-	info.text = 'Добро пожаловать, ' + Data.active_user.user_name + '!'
-	yield(get_tree().create_timer(2), "timeout")
 	state = Core.LOGON_STATE.LOGIN
+	if !anim_bg.is_playing():
+		anim_bg.play("hide")
+	if !anim_power.is_playing():
+		anim_power.play("hide")
+	if !anim_info.is_playing():
+		anim_info.play("show")
+	info.text = 'Добро пожаловать, ' + Data.active_user.user_name + '!'
 
-func _on_Tween_tween_completed(object, _key):
-	# Когда синий экран
-	if object == bg && bg.color == Core.bg_on:
-		# Если Нет активного пользователя И пользователей > 2
+func _on_off_pressed():
+	state = Core.LOGON_STATE.OFF
+	win_state = null
+	if !anim_bg.is_playing():
+		anim_bg.play("hide")
+	if !anim_wus.is_playing() && win_user_select.visible:
+		anim_wus.play("hide")
+	if !anim_logon.is_playing() && win_logon.visible:
+		anim_logon.play("hide")
+	if !anim_power.is_playing():
+		anim_power.play("hide")
+
+func _on_reload_pressed():
+	state = Core.LOGON_STATE.RELOAD
+	win_state = null
+	if !anim_bg.is_playing():
+		anim_bg.play("hide")
+	if !anim_wus.is_playing() && win_user_select.visible:
+		anim_wus.play("hide")
+	if !anim_logon.is_playing() && win_logon.visible:
+		anim_logon.play("hide")
+	if !anim_power.is_playing():
+		anim_power.play("hide")
+
+func _on_back_pressed():
+	Data.active_user = null
+	win_state = WIN_STATE.SELECT
+	if !anim_logon.is_playing():
+		anim_logon.play("hide")
+
+func _on_anim_info_animation_finished(anim_name):
+	if anim_name == 'hide' && state == Core.LOGON_STATE.START:
 		if Data.active_user == null && len(Data.users) > 2:
+			win_logon_back.visible = true
 			# Показать экран выбора пользователя
-			yield(get_tree().create_timer(1), "timeout")
-			t_win_user_select()
-			t_win_power()
+			if !anim_wus.is_playing():
+				anim_wus.play("show")
+			if !anim_power.is_playing():
+				anim_power.play("show")
 		# Когда Нет активного пользователя И пользователей 2
 		elif Data.active_user == null && len(Data.users) == 2:
+			win_logon_back.visible = false
 			# Выбор не скрытого пользователя
 			# (Он всегда второй, Админ всегда первый)
 			Data.active_user = Data.users[len(Data.users) - 1]
-			yield(get_tree().create_timer(1), "timeout")
 			# Если пользователь без защиты
 			if Data.active_user.settings.is_unsafe:
 				# Вход в систему
 				info_login()
 			else:
 				# Проверка защиты
-				t_win_logon()
-				t_win_power()
-	# Когда чёрный экран
-	elif object == bg && bg.color == Core.bg_black:
+				if !anim_logon.is_playing():
+					anim_logon.play("show")
+				if !anim_power.is_playing():
+					anim_power.play("show")
+	elif anim_name == 'hide' && state == Core.LOGON_STATE.LOGIN:
+		yield(get_tree().create_timer(1), "timeout")
+		var desktop = get_tree().change_scene_to(Core.desktop)
+		if desktop == OK:
+			print('////REBOOT-OS////')
+
+func _on_anim_bg_animation_finished(anim_name):
+	if anim_name == 'hide' && state == Core.LOGON_STATE.LOGIN:
 		# Затухание info текста
-		t3_modulate_a(info, 1, 0, 1)
-	# Когда потух Проверка защиты но ещё виден в дереве
-	elif object == win_logon && win_logon.modulate.a == 0 \
-	&& win_logon.visible == true:
-		# Скрыть, чтобы случайно не тронуть невидимку
-		win_logon.visible = false
-
-func _on_off_pressed():
-	state = Core.LOGON_STATE.OFF
-	t_color(bg, Core.bg_on, Core.bg_black, 4)
-	t_win_logon(false)
-	t_win_power(false)
-
-func _on_Tween2_tween_completed(object, _key):
-	if object == win_power && win_power.modulate.a == 0 \
-	&& win_power.visible == true:
-		win_power.visible = false
-
-func _on_reload_pressed():
-	state = Core.LOGON_STATE.RELOAD
-	t_color(bg, Core.bg_on, Core.bg_black, 4)
-	t_win_logon(false)
-	t_win_power(false)
-
-func _on_Tween3_tween_completed(_object, _key):
-	if state == Core.LOGON_STATE.OFF:
-		get_tree().quit()
-	if state == Core.LOGON_STATE.RELOAD:
-		var restart = get_tree().change_scene("res://scenes/main.tscn")
+		if !anim_info.is_playing():
+			anim_info.play("hide")
+	elif anim_name == 'hide' && state == Core.LOGON_STATE.RELOAD:
+		yield(get_tree().create_timer(1), "timeout")
+		var restart = get_tree().change_scene_to(Core.loading_res)
 		if restart == OK:
 			print('////REBOOT-OS////')
-	if state == Core.LOGON_STATE.LOGIN:
+	elif anim_name == 'hide' && state == Core.LOGON_STATE.OFF:
+		yield(get_tree().create_timer(1), "timeout")
 		get_tree().quit()
+
+func _on_anim_wus_animation_finished(anim_name):
+	if anim_name == 'hide' && win_state == WIN_STATE.LOGON:
+		if Data.active_user.settings.is_unsafe:
+				# Вход в систему
+				info_login()
+		else:
+			if !anim_logon.is_playing():
+				anim_logon.play("show")
+
+func _on_anim_logon_animation_finished(anim_name):
+	if anim_name == 'hide' && win_state == WIN_STATE.SELECT:
+		if !anim_wus.is_playing():
+			anim_wus.play("show")
+
+func _on_login_btn_pressed():
+	if win_logon_login.text == Data.active_user.login\
+	&& win_logon_password.text == Data.active_user.password:
+		if !anim_logon.is_playing():
+			anim_logon.play("hide")
+		info_login()
+

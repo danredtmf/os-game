@@ -1,9 +1,8 @@
 extends Control
 
-onready var loading = $e/loading
-onready var info = $e/loading/info
+onready var info = $e/info
 
-onready var tween = $c/Tween
+onready var anim_info = $c/anim_info
 
 func _ready():
 	Data.active_user = null
@@ -12,8 +11,9 @@ func _ready():
 	start()
 
 func start():
-	t_info()
-	yield(get_tree().create_timer(1), "timeout")
+	if !anim_info.is_playing():
+		anim_info.play("show")
+	
 	var str_info = info.text
 	
 	info_state(str_info)
@@ -44,17 +44,8 @@ func info_state(text):
 			Core.INFO_STATE.FOUR:
 				info.text = text + "..."
 	
-	t_info(false)
-
-func t_info(b = true):
-	if b:
-		tween.interpolate_property(info, 'modulate:a', 0.0, 1.0, 1.0, 
-		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
-	else:
-		tween.interpolate_property(info, 'modulate:a', 1.0, 0.0, 1.0, 
-		Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		tween.start()
+	if !anim_info.is_playing():
+		anim_info.play("hide")
 
 func init():
 	if len(Data.users) > 1:
@@ -66,7 +57,7 @@ func init():
 		if first_run == OK:
 			print('////FIRST-RUN////')
 
-func _on_Tween_tween_completed(object, _key):
-	if object == info && info.modulate.a == 0:
+func _on_anim_info_animation_finished(anim_name):
+	if anim_name == 'hide':
 		yield(get_tree().create_timer(1), "timeout")
 		init()
