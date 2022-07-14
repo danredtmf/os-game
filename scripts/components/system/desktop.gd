@@ -2,6 +2,10 @@ extends Control
 
 onready var m_taskbar = $margin_taskbar
 onready var taskbar = $margin_taskbar/tb
+onready var datetime = $margin_taskbar/tb/margin/hb/DateTime
+
+func _ready() -> void:
+	datetime.text = get_datetime_string()
 
 func _on_ch_user_btn_pressed():
 	$anim_menu.play("hide")
@@ -33,3 +37,24 @@ func _on_menu_toggled(button_pressed):
 		$anim_menu.play("show")
 	else:
 		$anim_menu.play("hide")
+
+func get_datetime_string() -> String:
+	var d = OS.get_datetime()
+	var hour = "0%d" % [d["hour"]] if str(d["hour"]).length() < 2 \
+		else "%d" % [d["hour"]]
+	var minute = "0%d" % [d["minute"]] if str(d["minute"]).length() < 2 \
+		else "%d" % [d["minute"]]
+	var second = "0%d" % [d["second"]] if str(d["second"]).length() < 2 \
+		else "%d" % [d["second"]]
+	var day = "0%d" % [d["day"]] if str(d["day"]).length() < 2 \
+		else "%d" % [d["day"]]
+	var month = "0%d" % [d["month"]] if str(d["month"]).length() < 2 \
+		else "%d" % [d["month"]]
+	var year = "%d" % [d["year"]]
+	
+	return "%s:%s:%s\n%s.%s.%s" % \
+	[hour, minute, second, day, month, year]
+
+func _on_TimeTimer_timeout() -> void:
+	datetime.text = get_datetime_string()
+

@@ -23,15 +23,15 @@ func _ready():
 #	Data.active_user.apps.chat.dialogs.append(d)
 #
 #	Data.save_users()
-	
-	var ld = Label.new()
-	ld.text = Data.active_user.apps.chat.dialogs[0].sender_name
-	
-	var lm = Label.new()
-	lm.text = Data.active_user.apps.chat.dialogs[0].messages[0].message
-	
-	chats_dialogs.add_child(ld)
-	message.add_child(lm)
+#
+#	var ld = Label.new()
+#	ld.text = Data.active_user.apps.chat.dialogs[0].sender_name
+#
+#	var lm = Label.new()
+#	lm.text = Data.active_user.apps.chat.dialogs[0].messages[0].message
+#
+#	chats_dialogs.add_child(ld)
+#	message.add_child(lm)
 
 func _on_info_mouse_entered():
 	is_move = true
