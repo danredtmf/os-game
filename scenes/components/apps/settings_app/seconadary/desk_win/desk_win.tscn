@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sources/themes/light_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/components/apps/settings_app/seconadary/desk_win/desk_win.gd" type="Script" id=2]
+
+[node name="DeskWin" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Win" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Margin" type="MarginContainer" parent="Win"]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VB" type="VBoxContainer" parent="Win/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+
+[node name="DeskSeconds" type="CheckBox" parent="Win/Margin/VB"]
+margin_right = 1004.0
+margin_bottom = 26.0
+text = "Показывать секунды на часах"
+clip_text = true
+
+[connection signal="toggled" from="Win/Margin/VB/DeskSeconds" to="." method="_on_DeskSeconds_toggled"]

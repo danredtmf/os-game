@@ -12,32 +12,32 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Chat",
 "language": "GDScript",
-"path": "res://objects/chat.gd"
+"path": "res://objects/chat/chat.gd"
 }, {
 "base": "Node",
 "class": "ChatDialog",
 "language": "GDScript",
-"path": "res://objects/chat-dialog.gd"
+"path": "res://objects/chat/chat_dialog.gd"
 }, {
 "base": "Node",
 "class": "ChatDialogMessage",
 "language": "GDScript",
-"path": "res://objects/chat-dialog-message.gd"
+"path": "res://objects/chat/chat_dialog_message.gd"
 }, {
 "base": "Node",
 "class": "User",
 "language": "GDScript",
-"path": "res://objects/user.gd"
+"path": "res://objects/user/user.gd"
 }, {
 "base": "Node",
 "class": "UserApps",
 "language": "GDScript",
-"path": "res://objects/user-apps.gd"
+"path": "res://objects/user/user_apps.gd"
 }, {
 "base": "Node",
 "class": "UserSettings",
 "language": "GDScript",
-"path": "res://objects/user-settings.gd"
+"path": "res://objects/user/user_settings.gd"
 } ]
 _global_script_class_icons={
 "Chat": "",
@@ -51,13 +51,15 @@ _global_script_class_icons={
 [application]
 
 config/name="os-game"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/main/main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Core="*res://scripts/globals/core.gd"
-Data="*res://scripts/globals/data.gd"
+GlobalReference="*res://objects/globals/reference.gd"
+Signals="*res://objects/globals/signals.gd"
+Core="*res://objects/globals/core.gd"
+Data="*res://objects/globals/data.gd"
 
 [display]
 

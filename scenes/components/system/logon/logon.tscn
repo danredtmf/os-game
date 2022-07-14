@@ -1,0 +1,760 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://sources/themes/light_theme.tres" type="Theme" id=1]
+[ext_resource path="res://sources/themes/font-sizes/rbk-r-18.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sources/themes/font-sizes/rbk-r-24.tres" type="DynamicFont" id=3]
+[ext_resource path="res://sources/themes/font-sizes/rbk-r-32.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/components/system/logon/logon.gd" type="Script" id=5]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinUserSelect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 358, 160.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinUserSelect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinUserSelect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinUserSelect:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinUserSelect:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinUserSelect:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinUserSelect:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinUserSelect:visible")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinUserSelect:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinLogon:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinLogon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinLogon:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinLogon:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinLogon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinLogon:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinLogon:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 362, 175 ), Vector2( 362, 175 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinLogon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WinLogon:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinPower:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinPower:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "hide"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinPower:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinPower:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "show"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("WinPower:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WinPower:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "hide"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.21, 0.55, 0.99, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0.21, 0.55, 0.99, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Info:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Info:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Info:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Info:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Logon" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="BG" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Info" type="Label" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -19.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+autowrap = true
+
+[node name="WinUserSelect" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -154.0
+margin_top = -139.5
+margin_right = 154.0
+margin_bottom = 139.5
+
+[node name="Margin" type="MarginContainer" parent="WinUserSelect"]
+margin_right = 308.0
+margin_bottom = 279.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 0
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 0
+
+[node name="VB" type="VBoxContainer" parent="WinUserSelect/Margin"]
+margin_left = 10.0
+margin_right = 298.0
+margin_bottom = 279.0
+alignment = 1
+
+[node name="Info" type="Label" parent="WinUserSelect/Margin/VB"]
+margin_right = 288.0
+margin_bottom = 61.0
+size_flags_vertical = 7
+custom_fonts/font = ExtResource( 3 )
+text = "Выберите пользователя"
+align = 1
+valign = 1
+
+[node name="Scroll" type="ScrollContainer" parent="WinUserSelect/Margin/VB"]
+margin_top = 65.0
+margin_right = 288.0
+margin_bottom = 213.0
+rect_min_size = Vector2( 0, 148 )
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Margin" type="MarginContainer" parent="WinUserSelect/Margin/VB/Scroll"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 283.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VB" type="VBoxContainer" parent="WinUserSelect/Margin/VB/Scroll/Margin"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 273.0
+margin_bottom = 5.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="HB" type="HBoxContainer" parent="WinUserSelect/Margin/VB"]
+margin_top = 232.0
+margin_right = 288.0
+margin_bottom = 264.0
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Info" type="Label" parent="WinUserSelect/Margin/VB/HB"]
+margin_top = 5.0
+margin_right = 87.0
+margin_bottom = 27.0
+size_flags_horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Впервые?"
+align = 1
+valign = 1
+
+[node name="Register" type="Button" parent="WinUserSelect/Margin/VB/HB"]
+margin_left = 147.0
+margin_right = 288.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+text = "Новый аккаунт"
+
+[node name="WinLogon" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -125.0
+margin_right = 150.0
+margin_bottom = 125.0
+
+[node name="Margin" type="MarginContainer" parent="WinLogon"]
+margin_right = 300.0
+margin_bottom = 250.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VB" type="VBoxContainer" parent="WinLogon/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 290.0
+margin_bottom = 240.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Welcome" type="Label" parent="WinLogon/Margin/VB"]
+margin_right = 280.0
+margin_bottom = 34.0
+size_flags_vertical = 7
+custom_fonts/font = ExtResource( 3 )
+text = "Добро пожаловать!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VB" type="VBoxContainer" parent="WinLogon/Margin/VB"]
+margin_top = 49.0
+margin_right = 280.0
+margin_bottom = 183.0
+size_flags_vertical = 3
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Login" type="HBoxContainer" parent="WinLogon/Margin/VB/VB"]
+margin_right = 280.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 30 )
+alignment = 1
+
+[node name="Login" type="Label" parent="WinLogon/Margin/VB/VB/Login"]
+margin_top = 1.0
+margin_right = 138.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Логин:"
+valign = 1
+
+[node name="Edit" type="LineEdit" parent="WinLogon/Margin/VB/VB/Login"]
+margin_left = 142.0
+margin_right = 280.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+
+[node name="Pass" type="HBoxContainer" parent="WinLogon/Margin/VB/VB"]
+margin_top = 47.0
+margin_right = 280.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="Pass" type="Label" parent="WinLogon/Margin/VB/VB/Pass"]
+margin_top = 1.0
+margin_right = 138.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Пароль:"
+valign = 1
+
+[node name="Edit" type="LineEdit" parent="WinLogon/Margin/VB/VB/Pass"]
+margin_left = 142.0
+margin_right = 280.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+secret = true
+
+[node name="LoginBtn" type="Button" parent="WinLogon/Margin/VB/VB"]
+margin_top = 94.0
+margin_right = 280.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = ExtResource( 3 )
+text = "Войти"
+
+[node name="HB" type="HBoxContainer" parent="WinLogon/Margin/VB"]
+margin_top = 198.0
+margin_right = 280.0
+margin_bottom = 230.0
+alignment = 1
+
+[node name="Back" type="Button" parent="WinLogon/Margin/VB/HB"]
+margin_right = 280.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Назад"
+
+[node name="WinPower" type="Panel" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -294.0
+margin_top = -68.0
+margin_right = -16.0
+margin_bottom = -16.0
+
+[node name="Margin" type="MarginContainer" parent="WinPower"]
+margin_right = 278.0
+margin_bottom = 52.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HB" type="HBoxContainer" parent="WinPower/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 268.0
+margin_bottom = 42.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Reload" type="Button" parent="WinPower/Margin/HB"]
+margin_right = 140.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+text = "Перезагрузить"
+
+[node name="Off" type="Button" parent="WinPower/Margin/HB"]
+margin_left = 150.0
+margin_right = 258.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+text = "Выключить"
+
+[node name="AnimationWinUserSelect" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/hide = SubResource( 3 )
+anims/show = SubResource( 1 )
+
+[node name="AnimationLogon" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/hide = SubResource( 6 )
+anims/show = SubResource( 5 )
+
+[node name="AnimationPower" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/hide = SubResource( 8 )
+anims/show = SubResource( 9 )
+
+[node name="AnimationBG" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 10 )
+anims/hide = SubResource( 12 )
+anims/show = SubResource( 11 )
+
+[node name="AnimationInfo" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/hide = SubResource( 14 )
+anims/show = SubResource( 15 )
+
+[connection signal="pressed" from="WinLogon/Margin/VB/VB/LoginBtn" to="." method="_on_login_btn_pressed"]
+[connection signal="pressed" from="WinLogon/Margin/VB/HB/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="WinPower/Margin/HB/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="WinPower/Margin/HB/Off" to="." method="_on_off_pressed"]
+[connection signal="animation_finished" from="AnimationWinUserSelect" to="." method="_on_anim_wus_animation_finished"]
+[connection signal="animation_finished" from="AnimationLogon" to="." method="_on_anim_logon_animation_finished"]
+[connection signal="animation_finished" from="AnimationBG" to="." method="_on_anim_bg_animation_finished"]
+[connection signal="animation_finished" from="AnimationInfo" to="." method="_on_anim_info_animation_finished"]
