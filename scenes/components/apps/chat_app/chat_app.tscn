@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://sources/themes/light_theme.tres" type="Theme" id=1]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-18.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/components/apps/chat_app/chat_app.gd" type="Script" id=3]
 
@@ -141,7 +140,6 @@ tracks/2/keys = {
 anchor_right = 0.585938
 anchor_bottom = 0.666667
 rect_pivot_offset = Vector2( 300, 200 )
-theme = ExtResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -156,8 +154,10 @@ rect_pivot_offset = Vector2( 300, 200 )
 size_flags_vertical = 3
 
 [node name="Margin" type="MarginContainer" parent="Win"]
-margin_right = 600.0
-margin_bottom = 400.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 593.0
+margin_bottom = 393.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -166,17 +166,17 @@ custom_constants/margin_bottom = 5
 [node name="VB" type="VBoxContainer" parent="Win/Margin"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 595.0
-margin_bottom = 395.0
+margin_right = 581.0
+margin_bottom = 381.0
 
 [node name="Info" type="HBoxContainer" parent="Win/Margin/VB"]
-margin_right = 590.0
-margin_bottom = 32.0
+margin_right = 576.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="Info" type="Label" parent="Win/Margin/VB/Info"]
-margin_right = 536.0
-margin_bottom = 32.0
+margin_right = 522.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 custom_fonts/font = ExtResource( 2 )
@@ -184,43 +184,41 @@ text = "Сообщения"
 valign = 1
 
 [node name="Btn" type="HBoxContainer" parent="Win/Margin/VB/Info"]
-margin_left = 540.0
-margin_right = 590.0
-margin_bottom = 32.0
+margin_left = 526.0
+margin_right = 576.0
+margin_bottom = 28.0
 alignment = 2
 
 [node name="Close" type="Button" parent="Win/Margin/VB/Info/Btn"]
 margin_right = 50.0
-margin_bottom = 32.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 2 )
 text = "X"
 
 [node name="HB" type="HBoxContainer" parent="Win/Margin/VB"]
-margin_top = 36.0
-margin_right = 590.0
-margin_bottom = 390.0
+margin_top = 32.0
+margin_right = 576.0
+margin_bottom = 376.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="HS" type="HSplitContainer" parent="Win/Margin/VB/HB"]
-margin_right = 590.0
-margin_bottom = 354.0
+margin_right = 576.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 split_offset = -100
 
 [node name="Chats" type="ScrollContainer" parent="Win/Margin/VB/HB/HS"]
-margin_right = 189.0
-margin_bottom = 354.0
+margin_right = 182.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 
 [node name="Margin" type="MarginContainer" parent="Win/Margin/VB/HB/HS/Chats"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 184.0
-margin_bottom = 349.0
+margin_right = 182.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 5
@@ -231,32 +229,30 @@ custom_constants/margin_bottom = 5
 [node name="VB" type="VBoxContainer" parent="Win/Margin/VB/HB/HS/Chats/Margin"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 174.0
+margin_right = 177.0
 margin_bottom = 339.0
 
 [node name="Info" type="Label" parent="Win/Margin/VB/HB/HS/Chats/Margin/VB"]
-margin_right = 169.0
+margin_right = 172.0
 margin_bottom = 22.0
 custom_fonts/font = ExtResource( 2 )
 text = "Диалоги"
 
 [node name="Items" type="VBoxContainer" parent="Win/Margin/VB/HB/HS/Chats/Margin/VB"]
 margin_top = 26.0
-margin_right = 169.0
+margin_right = 172.0
 margin_bottom = 26.0
 
 [node name="Message" type="ScrollContainer" parent="Win/Margin/VB/HB/HS"]
-margin_left = 201.0
-margin_right = 590.0
-margin_bottom = 354.0
+margin_left = 194.0
+margin_right = 576.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 follow_focus = true
 
 [node name="Margin" type="MarginContainer" parent="Win/Margin/VB/HB/HS/Message"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 384.0
-margin_bottom = 349.0
+margin_right = 382.0
+margin_bottom = 344.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 5

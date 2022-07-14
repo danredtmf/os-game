@@ -59,7 +59,7 @@ func load_user_list():
 	
 	for i in range(len(user_list)):
 		var user_panel = user_res.instance()
-		user_panel.get_node("margin/hb/select")\
+		user_panel.get_node("Margin/HB/Select")\
 			.connect("pressed", self, "on_select_user")
 		user_panel.id = user_list[i].id
 		user_panel.user_name = user_list[i].user_name
@@ -172,9 +172,7 @@ func _on_anim_info_animation_finished(anim_name):
 					anim_power.play("show")
 	elif anim_name == 'hide' && state == Core.LOGON_STATE.LOGIN:
 		yield(get_tree().create_timer(1), "timeout")
-		var desktop = get_tree().change_scene_to(Core.desktop)
-		if desktop == OK:
-			print('////REBOOT-OS////')
+		Core.change_scene("desktop", GlobalReference.desktop)
 
 func _on_anim_bg_animation_finished(anim_name):
 	if anim_name == 'hide' && state == Core.LOGON_STATE.LOGIN:
@@ -183,9 +181,7 @@ func _on_anim_bg_animation_finished(anim_name):
 			anim_info.play("hide")
 	elif anim_name == 'hide' && state == Core.LOGON_STATE.RELOAD:
 		yield(get_tree().create_timer(1), "timeout")
-		var restart = get_tree().change_scene_to(Core.loading_res)
-		if restart == OK:
-			print('////REBOOT-OS////')
+		Core.change_scene("loading-system", GlobalReference.loading_system)
 	elif anim_name == 'hide' && state == Core.LOGON_STATE.OFF:
 		yield(get_tree().create_timer(1), "timeout")
 		get_tree().quit()

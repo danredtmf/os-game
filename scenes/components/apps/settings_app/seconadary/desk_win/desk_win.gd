@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func config() -> void:
 	set_anchors_preset(Control.PRESET_WIDE)
-	if Data.active_user.settings.hide_seconds:
+	if !Data.active_user.settings.hide_seconds:
 		desk_seconds.pressed = true
 	else:
 		desk_seconds.pressed = false

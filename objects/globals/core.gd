@@ -22,5 +22,9 @@ func get_desktop_datetime_string() -> String:
 		else "%d" % [d["month"]]
 	var year = "%d" % [d["year"]]
 	
-	return "%s:%s:%s\n%s.%s.%s" % \
+	if Data.active_user.settings.hide_seconds:
+		return "%s:%s\n%s.%s.%s" % \
+	[hour, minute, day, month, year]
+	else:
+		return "%s:%s:%s\n%s.%s.%s" % \
 	[hour, minute, second, day, month, year]

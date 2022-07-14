@@ -140,9 +140,7 @@ func _on_anim_info_animation_finished(anim_name):
 			info_end()
 		elif info_state == Core.INFO_STATE.THREE:
 			yield(get_tree().create_timer(1), "timeout")
-			var loading = get_tree().change_scene_to(Core.loading_res)
-			if loading == OK:
-				print('////LOADING-OS////')
+			Core.change_scene("loading-system", GlobalReference.loading_system)
 
 func _on_anim_wnu_animation_finished(anim_name):
 	if anim_name == 'hide' && state == STATE.NAME:

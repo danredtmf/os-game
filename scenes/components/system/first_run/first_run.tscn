@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://sources/themes/light_theme.tres" type="Theme" id=1]
 [ext_resource path="res://sources/fonts/Rubik-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-18.tres" type="DynamicFont" id=3]
 [ext_resource path="res://sources/themes/font-sizes/rbk-r-24.tres" type="DynamicFont" id=4]
@@ -397,7 +396,6 @@ tracks/2/keys = {
 [node name="FirstRun" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 script = ExtResource( 6 )
 
 [node name="BG" type="ColorRect" parent="."]
